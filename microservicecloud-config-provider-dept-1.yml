@@ -1,8 +1,7 @@
-﻿spring:
+spring:
   profiles:
     active:
     - test
-
 ---
 server:
   port: 8001
@@ -39,7 +38,6 @@ info:
   company.name: www.caicai.com
   build.artifactId: $project.artifactId$
   build.version: $project.version$
-  
 ---
 server:
   port: 8007
@@ -50,7 +48,7 @@ mybatis:
   - classpath:mybatis/mapper/**/*.xml                       # mapper映射文件
     
 spring:
-  profiles: dev
+  profiles: test
   application:
     name: microservicecloud-dept
   datasource:
