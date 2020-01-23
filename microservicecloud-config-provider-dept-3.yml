@@ -1,0 +1,76 @@
+spring:
+  profiles:
+    active:
+    - test
+---
+server:
+  port: 8003
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml        # mybatis配置文件所在路径
+  type-aliases-package: com.springcloud.entity    # 所有Entity别名类所在包
+  mapper-locations:
+  - classpath:mybatis/mapper/**/*.xml                       # mapper映射文件
+    
+spring:
+  profiles: dev
+  application:
+    name: microservicecloud-dept
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver                # mysql驱动包   当前数据源操作类型 type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/cloudDB03           # 数据库名称
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5                                           # 数据库连接池的最小维持连接数
+      initial-size: 5                                       # 初始化连接数
+      max-total: 5                                          # 最大连接数
+      max-wait-millis: 200                                  # 等待连接获取的最大超时时间
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka3:7003/eureka/,  http://eureka2:7002/eureka/,  http://eureka1:7001/eureka/
+  instance:
+    instance-id: microservicecloud-dept:8003
+    prefer-ip-address: true
+info:
+  app.name: microservicecloud
+  company.name: www.caicai.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+---
+server:
+  port: 8009
+mybatis:
+  config-location: classpath:mybatis/mybatis.cfg.xml        # mybatis配置文件所在路径
+  type-aliases-package: com.springcloud.entity    # 所有Entity别名类所在包
+  mapper-locations:
+  - classpath:mybatis/mapper/**/*.xml                       # mapper映射文件
+    
+spring:
+  profiles: test
+  application:
+    name: microservicecloud-dept
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver                # mysql驱动包   当前数据源操作类型 type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/cloudDB09           # 数据库名称
+    username: root
+    password: root
+    dbcp2:
+      min-idle: 5                                           # 数据库连接池的最小维持连接数
+      initial-size: 5                                       # 初始化连接数
+      max-total: 5                                          # 最大连接数
+      max-wait-millis: 200                                  # 等待连接获取的最大超时时间
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka3:7009/eureka/,  http://eureka2:7008/eureka/,  http://eureka1:7007/eureka/
+  instance:
+    instance-id: microservicecloud-dept:8009
+    prefer-ip-address: true
+info:
+  app.name: microservicecloud
+  company.name: www.caicai.com
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
